@@ -10,6 +10,7 @@ import { postUser } from '../../api/users';
 import { getPositions } from '../../api/position';
 import styles from './Form.module.scss';
 import { LoaderComponent } from '../LoaderComponent';
+import { SuccessImage } from '../icons/SuccessImage';
 
 type Props = {
 	setPage: Dispatch<SetStateAction<number>>;
@@ -18,7 +19,7 @@ type Props = {
 export const Form = React.memo<Props>(({ setPage }) => {
 	const [positions, setPositions] = useState<Position[]>([]);
 	const [isSending, setIsSending] = useState<boolean>(false);
-	// const [isSent, setIsSent] = useState<boolean>(false);
+	const [isSent, setIsSent] = useState<boolean>(false);
 	// const [isError, setIsError] = useState(false);
 
 	const fetchToken = async () => {
@@ -74,14 +75,14 @@ export const Form = React.memo<Props>(({ setPage }) => {
 			const resp = await postUser(formData, accessToken);
 
 			if (resp) {
-				// setIsSent(true);
+				setIsSent(true);
 			}
 		} catch (error) {
 			console.log('fff');
 		} finally {
-			setIsSending(false);
-			reset();
 			setPage(1);
+			reset();
+			setIsSending(false);
 		}
 	};
 
@@ -89,9 +90,10 @@ export const Form = React.memo<Props>(({ setPage }) => {
 		<div>
 			{isSending && <LoaderComponent />}
 
-			{!isSending && (
+			{!isSending && !isSent && (
 				<>
 					<h2 className={styles.title}>Working with POST request</h2>
+
 					<form
 						className={styles.form}
 						id='form'
@@ -282,6 +284,13 @@ export const Form = React.memo<Props>(({ setPage }) => {
 						<Button children={'Send'} type='submit' />
 					</form>
 				</>
+			)}
+
+			{isSent && (
+				<div className={styles.image}>
+					<h2 className={styles.title}>User successfully registered</h2>
+					<SuccessImage />
+				</div>
 			)}
 		</div>
 	);
