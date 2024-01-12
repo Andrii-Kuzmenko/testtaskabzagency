@@ -1,0 +1,41 @@
+@import "../../styles/variables.scss";
+@import "../../styles/mixins.scss";
+@import "../../styles/extends.scss";
+
+.container {
+  background-color: $white-color;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  height: $header-height;
+  margin: 0 auto;
+  padding: 0 16px;
+  
+  @include onTablet {
+    padding: 0 32px;
+  }
+
+  @include onSmallDesktop {
+    padding: 0 60px;
+  }
+
+  @include onBigDesktop {
+    max-width: $max-width;
+    padding: 0;
+  }
+}
+
+.buttonsGroup {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  background-color: inherit;
+}
+
+.buttonsGroup li {
+  background-color: inherit;
+}

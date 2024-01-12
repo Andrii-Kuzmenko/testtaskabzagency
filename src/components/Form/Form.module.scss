@@ -1,0 +1,160 @@
+@import '../../styles/variables.scss';
+@import '../../styles/mixins.scss';
+
+.title {
+  margin-bottom: 50px;
+  text-align: center;
+  font-size: 40px;
+  font-weight: 400;
+  line-height: 40px;
+  color: $black-color;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 50px;
+  max-width: 380px;
+  margin: 0 auto;
+}
+
+.inputContainer {
+  width: 100%;
+}
+
+.input {
+  width: 100%;
+  height: 54px;
+  padding: 14px $input-padding-left;
+  border: 1px solid $border-color;
+  border-radius: 4px;
+  outline: none;
+  background-color: inherit;
+
+  cursor: pointer;
+}
+
+.input::placeholder {
+  font-size: 16px;
+  color: $placeolder-color;
+}
+
+// PHONE
+.phone {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 100%;
+}
+
+.phoneHint {
+  padding-left: $input-padding-left;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 14px;
+  color: $placeolder-color;
+}
+
+// POSITIONS
+.positionsTitle {
+  margin-top: -25px;
+  margin-bottom: 11px;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 26px;
+}
+
+.positions {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  width: 100%;
+}
+
+.position {
+  position: relative;
+  width: 100%;
+  padding-left: 32px;
+}
+
+.positionInput {
+  flex-shrink: 0;
+
+  cursor: pointer;
+}
+
+.positionInput::before {
+  content: '';
+  position: absolute;
+  top: 3px;
+  left: 0;
+  background-image: url('../../assets/images/Circle.svg');
+  @include square(20px);
+}
+
+.positionInput:checked::before {
+  content: '';
+  background-image: url('../../assets/images/CircleChecked.svg');
+}
+
+.positionInput ~ label {
+  cursor: pointer;
+}
+
+// PHOTO
+.photoContainer {
+  display: flex;
+  width: 100%;
+  margin-top: -50px;
+}
+
+.hiddenInput,
+.hiddenInput:checked {
+  width: 0;
+  height: 0;
+  margin: 0;
+}
+
+.photoButton {
+  padding: 14px 15px;
+  border: 1px solid $black-color;
+  border-radius: 4px 0px 0px 4px;
+  text-align: center;
+
+  cursor: pointer;
+}
+
+.photoItem {
+  width: 100%;
+  padding: 14px 16px;
+  border: 1px solid $border-color;
+  border-left-width: 0;
+  border-radius: 0px 4px 4px 0;
+  color: $placeolder-color;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.photoItemFilled {
+  color: $black-color;
+}
+
+// ERROR
+.error {
+  border: 2px solid $error-color;
+}
+
+.errorText {
+  padding-left: $input-padding-left;
+  font-size: 12px;
+  color: $error-text-color;
+}
+
+.photoItemError {
+  border-left-width: 0;
+}

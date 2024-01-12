@@ -1,0 +1,38 @@
+@import '../../styles/variables.scss';
+@import "../../styles/mixins.scss";
+@import "../../styles/extends.scss";
+
+.article {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  width: 100%;
+  padding: 20px;
+
+  text-align: center;
+  border-radius: 10px;
+  background-color: $white-color;
+}
+
+.name {
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 26px;
+  color: $black-color;
+  background-color: inherit;
+
+  @extend %ellipsis;
+}
+
+.description {
+  color: $black-color;
+  background-color: inherit;
+  @extend %ellipsis;
+}
+
+.photo {
+  border-radius: 70px;
+  @include square(70px);
+}

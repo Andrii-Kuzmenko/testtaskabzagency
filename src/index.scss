@@ -1,0 +1,50 @@
+@import './styles/variables.scss';
+
+* {
+  box-sizing: border-box;
+}
+
+@font-face {
+  font-display: swap;
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 400;
+  src: url('./assets/fonts/nunito-v26-latin-regular.woff2') format('woff2');
+}
+
+html,
+body {
+  height: auto;
+  width: 100%;
+
+  font-family: 'Nunito', sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 26px;
+
+  scroll-behavior: smooth;
+}
+
+a {
+  text-decoration: none;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+li,
+ul {
+  margin: 0;
+  padding: 0;
+  background-color: $grey-color;
+}
+
+li {
+  list-style-type: none;
+}

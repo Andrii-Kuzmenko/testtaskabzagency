@@ -1,0 +1,18 @@
+@import "../../styles/mixins.scss";
+
+.list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+  width: 100%;
+  
+  @include onTablet {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+  
+  @include onSmallDesktop {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 29px;
+  }
+}

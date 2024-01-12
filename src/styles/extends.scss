@@ -1,0 +1,37 @@
+@import './variables.scss';
+
+%ellipsis {
+  width: calc(100vw - (16px * 2) - 40px - 17px);
+  margin: 0 auto;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  
+  @include onTablet {
+      width: calc(50vw - 32px - 40px - (16px / 2) - 17px);
+    }
+    
+  @include onSmallDesktop {
+    width: calc((100vw - (60px * 2)) / 3 - (20px * 2) - (29px / 2) - 17px);
+  }
+  
+  @include onBigDesktop {
+    width: calc(($max-width / 3) - (20px * 2) - (29px / 2) - 17px);
+  }
+}
+
+%button {
+  flex-shrink: 0;
+  height: 34px;
+
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+
+  background-color: $yellow-color;
+  border-width: 0;
+  border-radius: 80px;
+
+  cursor: pointer;
+  @include hover(background-color, $hover-color);
+}
