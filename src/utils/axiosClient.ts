@@ -32,6 +32,3 @@ export const client = {
     return response;
   },
 };
-
-
-

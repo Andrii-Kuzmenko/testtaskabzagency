@@ -8,7 +8,6 @@ import { Form } from './components/Form';
 
 const App: React.FC = () => {
 	const [page, setPage] = useState<number>(1);
-	console.log(setPage);
 
 	return (
 		<>

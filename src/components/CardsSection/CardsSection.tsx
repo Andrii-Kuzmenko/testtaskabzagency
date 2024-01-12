@@ -6,6 +6,7 @@ import { User } from '../../types/User';
 import { getUsers } from '../../api/users';
 
 import styles from './CardsSection.module.scss';
+import { LoaderComponent } from '../LoaderComponent/LoaderComponent';
 
 type Props = {
 	page: number;
@@ -48,8 +49,7 @@ export const CardsSection: React.FC<Props> = ({ page, setPage }) => {
 	return (
 		<section className={styles.section} id='users'>
 			<h2 className={styles.title}>Working with GET request</h2>
-
-			<CardsList cards={users} />
+			{isLoading ? <LoaderComponent /> : <CardsList cards={users} />}
 			<Button
 				className={classNames(styles.button, {
 					[styles.disabled]: maxPage <= page,
