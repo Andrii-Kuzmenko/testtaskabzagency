@@ -7,13 +7,14 @@ import { getUsers } from '../../api/users';
 
 import styles from './CardsSection.module.scss';
 import { LoaderComponent } from '../LoaderComponent/LoaderComponent';
+import { ErrorMessage } from '../ErrorMessage';
 
 type Props = {
 	page: number;
 	setPage: Dispatch<SetStateAction<number>>;
 };
 
-export const CardsSection: React.FC<Props> = ({ page, setPage }) => {
+export const CardsSection = React.memo<Props>(({ page, setPage }) => {
 	const [users, setUsers] = useState<User[]>([]);
 	const [maxPage, setMaxPage] = useState<number>(0);
 	const [isLoading, setIsLoading] = useState(false);
@@ -44,19 +45,22 @@ export const CardsSection: React.FC<Props> = ({ page, setPage }) => {
 		setPage((current: number) => current + 1);
 	};
 
-	console.log('isLoading', isLoading);
-	console.log('isError', isError);
 	return (
-		<section className={styles.section} id='users'>
-			<h2 className={styles.title}>Working with GET request</h2>
-			{isLoading ? <LoaderComponent /> : <CardsList cards={users} />}
-			<Button
-				className={classNames(styles.button, {
-					[styles.disabled]: maxPage <= page,
-				})}
-				children={'Show more'}
-				onClick={showMore}
-			/>
+		<section id='users'>
+			{!isError && (
+				<div className={styles.section}>
+					<h2 className={styles.title}>Working with GET request</h2>
+					{isLoading ? <LoaderComponent /> : <CardsList cards={users} />}
+					<Button
+						className={classNames(styles.button, {
+							[styles.disabled]: maxPage <= page,
+						})}
+						children={'Show more'}
+						onClick={showMore}
+					/>
+				</div>
+			)}
+			{isError && <ErrorMessage />}
 		</section>
 	);
-};
+});

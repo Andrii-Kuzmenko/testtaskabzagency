@@ -11,6 +11,7 @@ import { getPositions } from '../../api/position';
 import styles from './Form.module.scss';
 import { LoaderComponent } from '../LoaderComponent';
 import { SuccessImage } from '../icons/SuccessImage';
+import { ErrorMessage } from '../ErrorMessage';
 
 type Props = {
 	setPage: Dispatch<SetStateAction<number>>;
@@ -20,7 +21,7 @@ export const Form = React.memo<Props>(({ setPage }) => {
 	const [positions, setPositions] = useState<Position[]>([]);
 	const [isSending, setIsSending] = useState<boolean>(false);
 	const [isSent, setIsSent] = useState<boolean>(false);
-	// const [isError, setIsError] = useState(false);
+	const [isError, setIsError] = useState(false);
 
 	const fetchToken = async () => {
 		try {
@@ -28,7 +29,7 @@ export const Form = React.memo<Props>(({ setPage }) => {
 
 			return fetchedToken.token;
 		} catch (error) {
-			console.log(error);
+			setIsError(true);
 		}
 	};
 
@@ -38,7 +39,7 @@ export const Form = React.memo<Props>(({ setPage }) => {
 
 			setPositions(fetchedPositions.positions);
 		} catch (error) {
-			console.log(error);
+			setIsError(true);
 		}
 	};
 
@@ -78,7 +79,7 @@ export const Form = React.memo<Props>(({ setPage }) => {
 				setIsSent(true);
 			}
 		} catch (error) {
-			console.log('fff');
+			setIsError(true);
 		} finally {
 			setPage(1);
 			reset();
@@ -88,9 +89,9 @@ export const Form = React.memo<Props>(({ setPage }) => {
 
 	return (
 		<div>
-			{isSending && <LoaderComponent />}
+			{isSending && !isError && <LoaderComponent />}
 
-			{!isSending && !isSent && (
+			{!isSending && !isSent && !isError && (
 				<>
 					<h2 className={styles.title}>Working with POST request</h2>
 
@@ -286,12 +287,14 @@ export const Form = React.memo<Props>(({ setPage }) => {
 				</>
 			)}
 
-			{isSent && (
+			{isSent && !isError && (
 				<div className={styles.image}>
 					<h2 className={styles.title}>User successfully registered</h2>
 					<SuccessImage />
 				</div>
 			)}
+
+			{isError && <ErrorMessage />}
 		</div>
 	);
 });
