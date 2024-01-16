@@ -34,14 +34,20 @@ export const Card: React.FC<Props> = ({
 	return (
 		<article className={styles.article}>
 			<Image className={styles.photo} src={photo} alt={name} />
-			<h3 className={styles.name}>{name}</h3>
-			<p className={styles.description}>
-				{position}
-				<br />
-				{email}
-				<br />
-				{formatPhoneNumber(phone)}
-			</p>
+			<h3 className={styles.name} title={name}>
+				{name}
+			</h3>
+			<div>
+        <p className={styles.description} title={position}>
+          {position}
+        </p>
+        <p className={styles.description} title={email}>
+          {email}
+        </p>
+        <p className={styles.description} title={formatPhoneNumber(phone)}>
+          {formatPhoneNumber(phone)}
+        </p>
+      </div>
 		</article>
 	);
 };
