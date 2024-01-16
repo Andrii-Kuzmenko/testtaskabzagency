@@ -6,10 +6,10 @@ interface Props extends DetailedHTMLProps<React.ImgHTMLAttributes<HTMLImageEleme
   alt: string,
 }
 
-export const Image: React.FC<Props> = ({ src, alt, ...props }) => (
+export const Image = React.memo<Props>(({ src, alt, ...props }) => (
   <img
     src={src}
     alt={alt}
     {...props}
   />
-);
+));

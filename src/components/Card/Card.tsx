@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { Image } from '../Image';
 
 import styles from './Card.module.scss';
@@ -11,15 +11,9 @@ type Props = {
 	phone: string;
 };
 
-export const Card: React.FC<Props> = ({
-	photo,
-	name,
-	position,
-	email,
-	phone,
-}) => {
-	const formatPhoneNumber = (input: string) => {
-		const digitsOnly = input.replace(/\D/g, '');
+export const Card = React.memo<Props>(({ photo, name, position, email, phone }) => {
+	const formatPhoneNumber = useMemo(() => {
+		const digitsOnly = phone.replace(/\D/g, '');
 
 		if (digitsOnly.length === 12) {
 			return digitsOnly.replace(
@@ -27,9 +21,9 @@ export const Card: React.FC<Props> = ({
 				'+$1 ($2) $3 $4 $5',
 			);
 		} else {
-			return input;
+			return phone;
 		}
-	}
+	}, [phone]);
 
 	return (
 		<article className={styles.article}>
@@ -38,16 +32,16 @@ export const Card: React.FC<Props> = ({
 				{name}
 			</h3>
 			<div>
-        <p className={styles.description} title={position}>
-          {position}
-        </p>
-        <p className={styles.description} title={email}>
-          {email}
-        </p>
-        <p className={styles.description} title={formatPhoneNumber(phone)}>
-          {formatPhoneNumber(phone)}
-        </p>
-      </div>
+				<p className={styles.description} title={position}>
+					{position}
+				</p>
+				<p className={styles.description} title={email}>
+					{email}
+				</p>
+				<p className={styles.description} title={formatPhoneNumber}>
+					{formatPhoneNumber}
+				</p>
+			</div>
 		</article>
 	);
-};
+});
