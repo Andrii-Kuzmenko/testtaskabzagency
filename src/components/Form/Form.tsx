@@ -15,10 +15,12 @@ import { parsePhoneNumberFromString } from 'libphonenumber-js';
 import styles from './Form.module.scss';
 
 type Props = {
+	page: number;
 	setPage: Dispatch<SetStateAction<number>>;
+	setTriggerPage: Dispatch<SetStateAction<boolean>>;
 };
 
-export const Form = React.memo<Props>(({ setPage }) => {
+export const Form = React.memo<Props>(({ page, setPage, setTriggerPage }) => {
 	const [positions, setPositions] = useState<Position[]>([]);
 	const [isSending, setIsSending] = useState<boolean>(false);
 	const [isSent, setIsSent] = useState<boolean>(false);
@@ -82,7 +84,11 @@ export const Form = React.memo<Props>(({ setPage }) => {
 		} catch (error) {
 			setIsError(true);
 		} finally {
-			setPage(1);
+			if (page === 1) {
+				setTriggerPage(curr => !curr);
+			} else {
+				setPage(1);
+			}
 			reset();
 			setIsSending(false);
 		}
