@@ -1,30 +1,31 @@
-# React + TypeScript + Vite
+# Project Documentation
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Introduction
+This documentation provides an overview of the implemented project, covering the aspects of working with mockups, integrating REST API (GET and POST), and utilizing technologies such as React, HTML5, CSS3, and Sass.
 
-Currently, two official plugins are available:
+Mockups
+The project's UI and design were developed based on the mockups provided in the Figma project.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+# [Figma design](https://www.figma.com/file/ykJhQGVFGbQBEQZzuktwvm/TESTTASK---2022?node-id=581%3A0&mode=dev)
 
-## Expanding the ESLint configuration
+# [API documentation](https://apidocs.abz.dev/test_assignment_for_frontend_developer_api_documentation#)
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+# [Demo link](https://andrii-kuzmenko.github.io/testtaskabzagency/)
 
-- Configure the top-level `parserOptions` property like this:
+## Starting project:
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+In the project directory, you can run:
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+### `npm i`
+### `npm run dev`
+
+## Used technologies:
+
+ - React
+ - Typescript
+ - SCSS
+ - Axios
+ - ClassNames
+ - usehooks-ts
+ - libphonenumber-js
+ - react-hook-form
