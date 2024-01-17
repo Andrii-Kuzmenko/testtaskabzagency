@@ -2,16 +2,17 @@ import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import classNames from 'classnames';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { Button } from '../Button';
+import { LoaderComponent } from '../LoaderComponent';
+import { ErrorMessage } from '../ErrorMessage';
+import { SuccessImage } from '../icons/SuccessImage';
 import { FormDataType } from '../../types/FormDataType';
 import { Position } from '../../types/Position';
 
 import { getToken } from '../../api/token';
 import { postUser } from '../../api/users';
 import { getPositions } from '../../api/position';
+import { parsePhoneNumberFromString } from 'libphonenumber-js';
 import styles from './Form.module.scss';
-import { LoaderComponent } from '../LoaderComponent';
-import { SuccessImage } from '../icons/SuccessImage';
-import { ErrorMessage } from '../ErrorMessage';
 
 type Props = {
 	setPage: Dispatch<SetStateAction<number>>;
@@ -61,7 +62,7 @@ export const Form = React.memo<Props>(({ setPage }) => {
 		const formData = new FormData();
 		formData.append('name', data.name);
 		formData.append('email', data.email);
-		formData.append('phone', data.phone);
+		formData.append('phone', data.phone.split(' ').join(''));
 		formData.append('position_id', data.position);
 		formData.append('photo', data.photo[0]);
 
@@ -85,6 +86,19 @@ export const Form = React.memo<Props>(({ setPage }) => {
 			reset();
 			setIsSending(false);
 		}
+	};
+
+	const normalizePhoneNumber = (value: string) => {
+		if (!value) {
+			return value;
+		}
+		const phoneNumber = parsePhoneNumberFromString(value);
+
+		if (!phoneNumber) {
+			return value;
+		}
+
+		return phoneNumber.formatInternational();
 	};
 
 	return (
@@ -155,27 +169,52 @@ export const Form = React.memo<Props>(({ setPage }) => {
 						</div>
 
 						<div className={styles.inputContainer}>
-							<div className={styles.phone}>
-								<input
-									{...register('phone', {
-										required: 'phone is required field',
-										pattern: {
-											value: /^(\+380\d{9})$/,
-											message: 'Number should start with code of Ukraine +380',
-										},
-									})}
-									className={classNames(styles.input, {
-										[styles.error]: errors?.phone,
-									})}
-									name='phone'
-									type='text'
-									placeholder='Phone'
-								/>
-								<p className={styles.phoneHint}>+38 (XXX) XXX - XX - XX</p>
-							</div>
-							{errors?.phone && (
-								<div className={styles.errorText}>{errors.phone.message}</div>
-							)}
+							<Controller
+								control={control}
+								name='phone'
+								rules={{
+									required: 'phone is required field',
+									pattern: {
+										value: /^\+380/,
+										message: 'Number should start with code of Ukraine +380',
+									},
+									minLength: {
+										value: 16,
+										message:
+											'Number should start with code of Ukraine +380 and be followed by 9 more digits',
+									},
+									maxLength: {
+										value: 16,
+										message:
+											'Number should start with code of Ukraine +380 and be followed by 9 more digits',
+									},
+								}}
+								render={({ field: { onChange }, fieldState: { error } }) => (
+									<>
+										<div className={styles.phone}>
+											<input
+												className={classNames(styles.input, {
+													[styles.error]: errors?.phone,
+												})}
+												name='phone'
+												type='text'
+												placeholder='Phone'
+												onChange={e =>
+													onChange(
+														(e.target.value = normalizePhoneNumber(
+															e.target.value,
+														)),
+													)
+												}
+											/>
+											<p className={styles.phoneHint}>+380 XX XXX XXXX</p>
+										</div>
+										{error && (
+											<div className={styles.errorText}>{error.message}</div>
+										)}
+									</>
+								)}
+							/>
 						</div>
 
 						<div className={styles.inputContainer}>
