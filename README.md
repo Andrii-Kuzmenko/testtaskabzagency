@@ -26,6 +26,5 @@ In the project directory, you can run:
  - SCSS
  - Axios
  - ClassNames
- - usehooks-ts
  - libphonenumber-js
  - react-hook-form

@@ -123,14 +123,14 @@ export const Form = React.memo<Props>(({ page, setPage, setTriggerPage }) => {
 						<div className={styles.inputContainer}>
 							<input
 								{...register('name', {
-									required: 'name is required field',
+									required: 'Name is required field',
 									minLength: {
 										value: 2,
-										message: 'min length 2 char!',
+										message: 'Min length 2 char!',
 									},
 									maxLength: {
 										value: 60,
-										message: 'max length 60 char!',
+										message: 'Max length 60 char!',
 									},
 								})}
 								className={classNames(styles.input, {
@@ -148,7 +148,7 @@ export const Form = React.memo<Props>(({ page, setPage, setTriggerPage }) => {
 						<div className={styles.inputContainer}>
 							<input
 								{...register('email', {
-									required: 'email is required field',
+									required: 'Email is required field',
 									pattern: {
 										value:
 											/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
@@ -156,11 +156,11 @@ export const Form = React.memo<Props>(({ page, setPage, setTriggerPage }) => {
 									},
 									minLength: {
 										value: 2,
-										message: 'min length 2 char!',
+										message: 'Min length 2 char!',
 									},
 									maxLength: {
 										value: 100,
-										message: 'max length 100 char!',
+										message: 'Max length 100 char!',
 									},
 								})}
 								className={classNames(styles.input, {
@@ -179,7 +179,7 @@ export const Form = React.memo<Props>(({ page, setPage, setTriggerPage }) => {
 								control={control}
 								name='phone'
 								rules={{
-									required: 'phone is required field',
+									required: 'Phone is required field',
 									pattern: {
 										value: /^\+380/,
 										message: 'Number should start with code of Ukraine +380',
@@ -230,7 +230,7 @@ export const Form = React.memo<Props>(({ page, setPage, setTriggerPage }) => {
 									<div key={position.id} className={styles.position}>
 										<input
 											{...register('position', {
-												required: 'position is required field',
+												required: 'Position is required field',
 												min: {
 													value: 1,
 													message: 'Min id should be 1',
